@@ -8,27 +8,14 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import Slot
 
-@Slot()
-def send_prompt():
-    print("Button pressed!")
-
-    #Get text from input field
-    prompt = prompt_input.text()
-    print(f"Prompt entered: {prompt}")
-
-    #Simulate response
-    response = f"{prompt}\nLet's delve into that tapestry of insight"
-    output_area.setText(response)
-
 # The catalyst for PySide
 app = QApplication(sys.argv)
-
 window = QWidget()
 
-# Dummy values so something, anything happens.
 window.setWindowTitle("AI Wrapper GUI")
-window.setGeometry(100, 100, 400, 300)
+window.setGeometry(100, 100, 600, 400)
 
+# Craft components to be laid out
 prompt_label = QLabel("Enter your prompt:")
 prompt_input = QLineEdit()
 send_button = QPushButton("Send to AI")
@@ -37,6 +24,7 @@ output_area.setReadOnly(True)
 
 layout = QVBoxLayout()
 
+# Layout the components
 layout.addWidget(prompt_label)
 layout.addWidget(prompt_input)
 layout.addWidget(send_button)
@@ -44,6 +32,16 @@ layout.addWidget(QLabel("AI Response:"))
 layout.addWidget(output_area)
 
 window.setLayout(layout)
+
+@Slot()
+def send_prompt():
+
+    #Get text from input field
+    prompt = prompt_input.text()
+
+    #Simulate response
+    response = f"{prompt}\nLet's delve into that tapestry of insight"
+    output_area.setText(response)
 
 send_button.clicked.connect(send_prompt)
 
