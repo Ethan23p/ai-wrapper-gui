@@ -18,7 +18,7 @@ def send_prompt():
 
     #Simulate response
     response = f"{prompt}\nLet's delve into that tapestry of insight"
-    outputarea.setText(response)
+    output_area.setText(response)
 
 # The catalyst for PySide
 app = QApplication(sys.argv)
@@ -29,6 +29,23 @@ window = QWidget()
 window.setWindowTitle("AI Wrapper GUI")
 window.setGeometry(100, 100, 400, 300)
 
-window.show()
+prompt_label = QLabel("Enter your prompt:")
+prompt_input = QLineEdit()
+send_button = QPushButton("Send to AI")
+output_area = QTextEdit()
+output_area.setReadOnly(True)
 
+layout = QVBoxLayout()
+
+layout.addWidget(prompt_label)
+layout.addWidget(prompt_input)
+layout.addWidget(send_button)
+layout.addWidget(QLabel("AI Response:"))
+layout.addWidget(output_area)
+
+window.setLayout(layout)
+
+send_button.clicked.connect(send_prompt)
+
+window.show()
 sys.exit(app.exec())
